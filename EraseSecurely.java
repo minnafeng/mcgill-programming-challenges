@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class T9Spelling {
+public class EraseSecurely {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt(); // number of ints
