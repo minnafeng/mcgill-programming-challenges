@@ -10,6 +10,8 @@ public class T9Spelling {
 
             System.out.println("Case #"+ i+1 + ": " + result);
         }
+
+        scanner.close();
     }
 }
 
