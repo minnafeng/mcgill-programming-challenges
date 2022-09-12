@@ -11,7 +11,7 @@ public class GuessTheDataStructure {
             // Define all 3 data structures
             Stack<String> stack = new Stack<>();
             LinkedList<String> queue = new LinkedList<>();
-            TreeSet<String> priorityQueue = new TreeSet<>();
+            PriorityQueue<String> priorityQueue = new PriorityQueue<>(Collections.reverseOrder()); // turn into maxPQ
 
             // define flags
             boolean isStack = true;
@@ -28,28 +28,17 @@ public class GuessTheDataStructure {
                     priorityQueue.add(cmdArray[1]);
 
                 } else { // type 2 command
-                    try {
-                        if (!(cmdArray[1].equals(stack.pop()))) {
-                            isStack = false;
-                        }
-                        if (!(cmdArray[1].equals(queue.removeFirst()))) {
-                            isQueue = false;
-                        }
-                        if (!(cmdArray[1].equals(priorityQueue.pollLast()))) {
-                            isPQ = false;
-                        }
-
-
-                    } catch (Exception e) {
+                    if (stack.isEmpty() || !(cmdArray[1].equals(stack.pop()))) {
                         isStack = false;
+                    }
+                    if (queue.isEmpty() || !(cmdArray[1].equals(queue.removeFirst()))) {
                         isQueue = false;
+                    }
+                    if (priorityQueue.isEmpty() || !(cmdArray[1].equals(priorityQueue.poll()))) {
                         isPQ = false;
-                        break;
                     }
                 }
-
             }
-            // System.out.println("stack: "+isStack+" queue: "+isQueue+" PQ: "+isPQ);
 
             if ((isStack && isQueue) || (isStack && isPQ) || (isQueue && isPQ)) { // if more than 2 true
                 System.out.println("not sure");
@@ -62,10 +51,7 @@ public class GuessTheDataStructure {
             } else { // none are true
                 System.out.println("impossible");
             }
-
         }
-
         scanner.close();
-
     }
 }
