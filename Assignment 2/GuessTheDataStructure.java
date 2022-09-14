@@ -6,12 +6,12 @@ public class GuessTheDataStructure {
 
         while (scanner.hasNext()) { // read until EOF
             int n = scanner.nextInt(); // number of test cases
-            scanner.nextLine(); // read the leftover new line since we are reading lines after
+            //scanner.nextLine(); // read the leftover new line since we are reading lines after
 
             // Define all 3 data structures
-            Stack<String> stack = new Stack<>();
-            LinkedList<String> queue = new LinkedList<>();
-            PriorityQueue<String> priorityQueue = new PriorityQueue<>(Collections.reverseOrder()); // turn into maxPQ
+            Stack<Integer> stack = new Stack<>();
+            LinkedList<Integer> queue = new LinkedList<>();
+            PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(Collections.reverseOrder()); // turn into maxPQ
 
             // define flags
             boolean isStack = true;
@@ -19,22 +19,23 @@ public class GuessTheDataStructure {
             boolean isPQ = true;
 
             for (int i = 0; i < n; i++) { // iterate through each command
-                String cmd = scanner.nextLine(); // read in next command
-                String[] cmdArray = cmd.split(" "); // [command type, element]
+                int cmd = scanner.nextInt();
 
-                if (cmdArray[0].equals("1")) { // type 1 command
-                    stack.add(cmdArray[1]);
-                    queue.addLast(cmdArray[1]);
-                    priorityQueue.add(cmdArray[1]);
+                if (cmd == 1) { // type 1 command
+                    int next = scanner.nextInt();
+                    stack.add(next);
+                    queue.addLast(next);
+                    priorityQueue.add(next);
 
                 } else { // type 2 command
-                    if (stack.isEmpty() || !(cmdArray[1].equals(stack.pop()))) {
+                    int expected = scanner.nextInt();
+                    if (stack.isEmpty() || !(expected == stack.pop())) {
                         isStack = false;
                     }
-                    if (queue.isEmpty() || !(cmdArray[1].equals(queue.removeFirst()))) {
+                    if (queue.isEmpty() || !(expected == queue.removeFirst())) {
                         isQueue = false;
                     }
-                    if (priorityQueue.isEmpty() || !(cmdArray[1].equals(priorityQueue.poll()))) {
+                    if (priorityQueue.isEmpty() || !(expected == priorityQueue.poll())) {
                         isPQ = false;
                     }
                 }
